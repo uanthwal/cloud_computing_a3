@@ -1,0 +1,38 @@
+version: '3'
+services:
+  app1:
+    build: Cloud_A3_catalogue_service
+    command: python Cloud_A3_catalogue_service/catalogue_service.py
+    volumes:
+      - .:/app1
+    ports:
+      - "7000:7000"
+    expose:
+      - 7000
+  app2:
+    build: Cloud_A3_log_service
+    command: python Cloud_A3_log_service/log_service.py
+    volumes:
+      - .:/app2
+    ports:
+      - "6000:6000"
+    expose:
+      - 6000
+  app3:
+    build: Cloud_A3_notes_service
+    command: python Cloud_A3_notes_service/notes_service.py
+    volumes:
+      - .:/app3
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+  app4:
+    build: Cloud_A3_user_service
+    command: python Cloud_A3_user_service/user_service.py
+    volumes:
+      - .:/app4
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
