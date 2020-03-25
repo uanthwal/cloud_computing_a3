@@ -8,9 +8,7 @@ from requests.packages.urllib3.util.retry import Retry
 app = Flask(__name__)
 CORS(app)
 
-# print(MACHINE_IP)
-# base_url = "http://54.85.124.206"
-base_url = "http://127.0.0.1"
+base_url = "http://54.85.124.206"
 
 @app.errorhandler(404)
 def not_found(error):
@@ -18,7 +16,7 @@ def not_found(error):
 
 
 def make_connection_to_db(target_db):
-    cnx = MongoClient('mongodb://upendra:upendra@test-load-balancer-2-178028104.us-east-1.elb.amazonaws.com:27017/cloud_a3')
+    cnx = MongoClient('mongodb://upendra:upendra@54.85.124.206:27017/cloud_a3')
     return cnx
 
 @app.route('/', methods=['GET'])
@@ -46,16 +44,16 @@ def search_text():
             session.mount('http://', adapter)
             session.mount('https://', adapter)
 
-            # session.get(url)
-            # log_service_response = session.post(base_url+str(":6000/write-data-to-search-log"), json={'keyword':searched_text})
-            # print(str(log_service_response))
+            session.get(url)
+            log_service_response = session.post(base_url+str(":6000/write-data-to-search-log"), json={'keyword':searched_text})
+            print(str(log_service_response))
             cursor_len = 0
             for c in cursor:
                 cursor_len  = cursor_len + 1
                 response_list.append({"book_name":c['book_name'], "author_name":c['author_name']})
-            # if cursor_len > 0:
-            #     catalogue_service_response = requests.post(base_url+str(":7000/write-data-to-catalogue"), json={'data':response_list})
-            #     print(str(catalogue_service_response))
+            if cursor_len > 0:
+                catalogue_service_response = requests.post(base_url+str(":7000/write-data-to-catalogue"), json={'data':response_list})
+                print(str(catalogue_service_response))
         else:
             print("Connection not established")
         return jsonify({'code': '200', 'data': response_list, 'message':'Search results for ' + searched_text + ' : ' + str(len(response_list)) +' result(s)'}), 200
