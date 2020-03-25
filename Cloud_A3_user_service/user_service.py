@@ -38,7 +38,7 @@ def search_text():
         if db_connection is not None:
             db = db_connection.cloud_a3
             # cursor = db.books.find({"book_name":{"$regex" : ".*"+searched_text+".*"}})
-            cursor = db.books.find({"$or":[{"book_name":{"$regex" : ".*"+searched_text+".*"}}, {"author_name":{"$regex" : ".*"+searched_text+".*"}}]})
+            cursor = db.books.find({"$or":[{"book_name":{"$regex" : ".*"+searched_text+".*", '$options' : 'i'}}, {"author_name":{"$regex" : ".*"+searched_text+".*", '$options' : 'i'}}]})
             session = requests.Session()
             retry = Retry(connect=3, backoff_factor=0.5)
             adapter = HTTPAdapter(max_retries=retry)
