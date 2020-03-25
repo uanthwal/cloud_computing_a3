@@ -43,8 +43,6 @@ def search_text():
             adapter = HTTPAdapter(max_retries=retry)
             session.mount('http://', adapter)
             session.mount('https://', adapter)
-
-            session.get(url)
             log_service_response = session.post(base_url+str(":6000/write-data-to-search-log"), json={'keyword':searched_text})
             print(str(log_service_response))
             cursor_len = 0
