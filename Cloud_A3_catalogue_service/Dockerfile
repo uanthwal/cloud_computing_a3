@@ -6,7 +6,6 @@
 # CMD [ "python", "./catalogue_service.py" ]
 
 FROM python:3
-EXPOSE 7000
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /app1
 WORKDIR /app1

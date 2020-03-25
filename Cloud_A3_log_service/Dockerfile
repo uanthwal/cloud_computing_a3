@@ -7,7 +7,6 @@
 
 
 FROM python:3
-EXPOSE 7000
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /app2
 WORKDIR /app2
