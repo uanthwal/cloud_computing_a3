@@ -12,7 +12,7 @@ def not_found(error):
 
 
 def make_connection_to_db(target_db):
-    cnx = MongoClient('mongodb://upendra:upendra@54.85.124.206:27017/cloud_a3')
+    cnx = MongoClient('mongodb://XXXX:XXXXX@54.85.XXX.XXX:27017/cloud_a3')
     return cnx
 
 @app.route('/', methods=['GET'])
